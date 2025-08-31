@@ -160,16 +160,16 @@ export function TrashBin() {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in-up">
+    <div className="space-y-8 animate-fade-in-up" style={{ background: 'var(--bg-primary)' }}>
       {/* Header Banner */}
-      <div className="card-glass p-6 border border-orange-500/30">
+      <div className="card-glass p-6 border" style={{ borderColor: 'rgba(245, 158, 11, 0.3)' }}>
         <div className="flex items-start space-x-4">
-          <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
-            <AlertTriangle className="h-6 w-6 text-orange-400" />
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 158, 11, 0.2)' }}>
+            <AlertTriangle className="h-6 w-6" style={{ color: 'var(--neon-orange)' }} />
           </div>
           <div>
-            <h3 className="font-semibold text-white">Trash Bin</h3>
-            <p className="text-gray-400 mt-1">
+            <h3 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Trash Bin</h3>
+            <p className="mt-1" style={{ color: 'var(--text-muted)' }}>
               Files in Trash are kept for 30 days. After that, they'll be permanently deleted and cannot be recovered.
             </p>
           </div>
@@ -180,7 +180,7 @@ export function TrashBin() {
       <div className="card-glass p-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: 'var(--text-muted)' }} />
             <input
               type="text"
               placeholder="Search deleted files..."
@@ -192,11 +192,11 @@ export function TrashBin() {
           
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4 text-gray-400" />
+              <Filter className="h-4 w-4" style={{ color: 'var(--text-muted)' }} />
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="input-glass px-4 py-3"
+                className="input-glass px-4 py-3 focus-ring"
               >
                 <option value="all">All Files</option>
                 <option value="documents">Documents</option>
@@ -211,7 +211,8 @@ export function TrashBin() {
               <div className="flex items-center space-x-3">
                 <button
                   onClick={() => handleRestore(Array.from(selectedFiles))}
-                  className="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all font-medium"
+                  className="flex items-center px-4 py-2 text-white rounded-xl transition-all font-medium hover:shadow-lg hover:-translate-y-1"
+                  style={{ backgroundColor: 'var(--neon-emerald)' }}
                 >
                   <RotateCcw className="h-4 w-4 mr-2" />
                   Restore ({selectedFiles.size})
@@ -219,7 +220,8 @@ export function TrashBin() {
                 
                 <button
                   onClick={() => handlePermanentDelete(Array.from(selectedFiles))}
-                  className="flex items-center px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all font-medium"
+                  className="flex items-center px-4 py-2 text-white rounded-xl transition-all font-medium hover:shadow-lg hover:-translate-y-1"
+                  style={{ backgroundColor: 'var(--neon-red)' }}
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
                   Delete Forever
@@ -232,16 +234,17 @@ export function TrashBin() {
 
       {/* Files List */}
       <div className="card-glass">
-        <div className="px-8 py-6 border-b border-white/10">
+        <div className="px-8 py-6 border-b" style={{ borderColor: 'var(--border-color)' }}>
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
               Deleted Files ({filteredFiles.length})
             </h2>
             
             {filteredFiles.length > 0 && (
               <button
                 onClick={selectAll}
-                className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                className="font-medium transition-colors"
+                style={{ color: 'var(--neon-blue)' }}
               >
                 {selectedFiles.size === filteredFiles.length ? 'Deselect All' : 'Select All'}
               </button>
@@ -251,24 +254,43 @@ export function TrashBin() {
         
         {filteredFiles.length === 0 ? (
           <div className="px-8 py-16 text-center">
-            <Trash2 className="h-16 w-16 text-gray-600 mx-auto mb-6" />
-            <h3 className="text-xl font-semibold text-white mb-2">Trash is empty</h3>
-            <p className="text-gray-400">No deleted files to display</p>
+            <Trash2 className="h-16 w-16 mx-auto mb-6" style={{ color: 'var(--text-muted)' }} />
+            <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Trash is empty</h3>
+            <p style={{ color: 'var(--text-muted)' }}>No deleted files to display</p>
           </div>
         ) : (
-          <div className="divide-y divide-white/10">
+          <div className="divide-y" style={{ borderColor: 'var(--border-color)' }}>
             {filteredFiles.map((file) => {
               const expiryStatus = getExpiryStatus(file.daysLeft);
               const isSelected = selectedFiles.has(file.id);
               
               return (
-                <div key={file.id} className={`px-8 py-6 hover:bg-white/5 transition-colors ${isSelected ? 'bg-blue-500/10' : ''}`}>
+                <div key={file.id} className="px-8 py-6 transition-colors" 
+                  style={{ 
+                    backgroundColor: isSelected ? 'rgba(59, 130, 246, 0.1)' : 'transparent' 
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isSelected) {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isSelected) {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
+                  }}
+                >
                   <div className="flex items-center space-x-4">
                     <input
                       type="checkbox"
                       checked={isSelected}
                       onChange={() => toggleFileSelection(file.id)}
-                      className="rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-white/10"
+                      className="rounded focus-ring"
+                      style={{ 
+                        borderColor: 'var(--border-color)',
+                        accentColor: 'var(--neon-blue)',
+                        backgroundColor: 'var(--bg-secondary)'
+                      }}
                     />
                     
                     <div className="flex-shrink-0">
@@ -277,17 +299,21 @@ export function TrashBin() {
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="text-sm font-semibold text-white truncate">
+                        <h3 className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)' }}>
                           {file.name}
                         </h3>
-                        <span className={`inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ${expiryStatus.bg} ${expiryStatus.color} ${expiryStatus.border} border`}>
+                        <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full border" style={{
+                          backgroundColor: expiryStatus.bg.replace('bg-', '').replace('-500/20', ''),
+                          color: expiryStatus.color.replace('text-', '').replace('-400', ''),
+                          borderColor: expiryStatus.border.replace('border-', '').replace('-500/30', '')
+                        }}>
                           {file.daysLeft} days left
                         </span>
                       </div>
                       
-                      <div className="flex items-center space-x-4 text-xs text-gray-400">
+                      <div className="flex items-center space-x-4 text-xs" style={{ color: 'var(--text-muted)' }}>
                         <span className="flex items-center">
-                          <Calendar className="h-3 w-3 mr-1" />
+                          <Calendar className="h-3 w-3 mr-1" style={{ color: 'var(--text-muted)' }} />
                           Deleted {file.deletedDate}
                         </span>
                         <span>{file.size}</span>
@@ -300,7 +326,14 @@ export function TrashBin() {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => handleRestore([file.id])}
-                        className="p-2 text-emerald-400 hover:bg-emerald-500/10 rounded-xl transition-colors"
+                        className="p-2 rounded-xl transition-colors"
+                        style={{ color: 'var(--neon-emerald)' }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
                         title="Restore file"
                       >
                         <RotateCcw className="h-4 w-4" />
@@ -308,7 +341,14 @@ export function TrashBin() {
                       
                       <button
                         onClick={() => handlePermanentDelete([file.id])}
-                        className="p-2 text-red-400 hover:bg-red-500/10 rounded-xl transition-colors"
+                        className="p-2 rounded-xl transition-colors"
+                        style={{ color: 'var(--neon-red)' }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
                         title="Delete permanently"
                       >
                         <X className="h-4 w-4" />
@@ -324,16 +364,16 @@ export function TrashBin() {
 
       {/* Storage Recovery Info */}
       {filteredFiles.length > 0 && (
-        <div className="card-glass p-6 border border-blue-500/30">
+        <div className="card-glass p-6 border" style={{ borderColor: 'rgba(59, 130, 246, 0.3)' }}>
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-              <CheckCircle2 className="h-6 w-6 text-blue-400" />
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(59, 130, 246, 0.2)' }}>
+              <CheckCircle2 className="h-6 w-6" style={{ color: 'var(--neon-blue)' }} />
             </div>
             <div>
-              <h3 className="font-semibold text-white">Storage Recovery</h3>
-              <p className="text-gray-400">
+              <h3 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Storage Recovery</h3>
+              <p style={{ color: 'var(--text-muted)' }}>
                 Permanently deleting these files will free up{' '}
-                <span className="font-semibold text-blue-400">
+                <span className="font-semibold" style={{ color: 'var(--neon-blue)' }}>
                   {trashedFiles.reduce((total, file) => {
                     const size = parseFloat(file.size);
                     const unit = file.size.split(' ')[1];

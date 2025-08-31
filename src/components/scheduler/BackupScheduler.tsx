@@ -100,11 +100,11 @@ export function BackupSchedulerComponent() {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in-up">
+    <div className="space-y-8 animate-fade-in-up" style={{ background: 'var(--bg-primary)' }}>
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-white">Backup Scheduler</h2>
-          <p className="text-gray-400">Automate your backups with custom schedules</p>
+          <h2 className="text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>Backup Scheduler</h2>
+          <p style={{ color: 'var(--text-muted)' }}>Automate your backups with custom schedules</p>
         </div>
         <button
           onClick={() => setShowCreateModal(true)}
@@ -117,11 +117,11 @@ export function BackupSchedulerComponent() {
 
       {schedules.length === 0 ? (
         <div className="card-glass p-16 text-center">
-          <div className="w-20 h-20 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Clock className="h-10 w-10 text-blue-400" />
+          <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(59, 130, 246, 0.2)' }}>
+            <Clock className="h-10 w-10" style={{ color: 'var(--neon-blue)' }} />
           </div>
-          <h3 className="text-2xl font-bold text-white mb-4">No Schedules Yet</h3>
-          <p className="text-gray-400 mb-8 max-w-md mx-auto">
+          <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>No Schedules Yet</h3>
+          <p className="mb-8 max-w-md mx-auto" style={{ color: 'var(--text-muted)' }}>
             Create your first backup schedule to automate your data protection and never worry about losing files again.
           </p>
           <button
@@ -138,19 +138,21 @@ export function BackupSchedulerComponent() {
             <div key={schedule.id} className="card-glass card-hover p-6">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center space-x-3">
-                  <div className={`p-3 rounded-xl ${schedule.enabled ? 'bg-emerald-500/20' : 'bg-gray-600/20'}`}>
+                  <div className="p-3 rounded-xl" style={{ 
+                    backgroundColor: schedule.enabled ? 'rgba(16, 185, 129, 0.2)' : 'rgba(107, 114, 128, 0.2)' 
+                  }}>
                     {schedule.enabled ? (
-                      <CheckCircle className="h-6 w-6 text-emerald-400" />
+                      <CheckCircle className="h-6 w-6" style={{ color: 'var(--neon-emerald)' }} />
                     ) : (
-                      <AlertCircle className="h-6 w-6 text-gray-400" />
+                      <AlertCircle className="h-6 w-6" style={{ color: 'var(--text-muted)' }} />
                     )}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white">{schedule.name}</h3>
+                    <h3 className="font-semibold" style={{ color: 'var(--text-primary)' }}>{schedule.name}</h3>
                     <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full mt-2 ${
                       schedule.backupType === 'full' 
-                        ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' 
-                        : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                        ? 'border' 
+                        : 'border'
                     }`}>
                       {schedule.backupType}
                     </span>
@@ -162,21 +164,51 @@ export function BackupSchedulerComponent() {
                     onClick={() => handleToggleSchedule(schedule)}
                     className={`p-2 rounded-xl transition-colors ${
                       schedule.enabled 
-                        ? 'text-emerald-400 hover:bg-emerald-500/10' 
-                        : 'text-gray-400 hover:bg-gray-600/10'
+                        ? '' 
+                        : ''
                     }`}
+                    style={{ color: schedule.enabled ? 'var(--neon-emerald)' : 'var(--text-muted)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = schedule.enabled ? 'rgba(16, 185, 129, 0.1)' : 'rgba(107, 114, 128, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                    style={{
+                      backgroundColor: schedule.backupType === 'full' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(16, 185, 129, 0.2)',
+                      color: schedule.backupType === 'full' ? 'var(--neon-blue)' : 'var(--neon-emerald)',
+                      borderColor: schedule.backupType === 'full' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(16, 185, 129, 0.3)'
+                    }}
                   >
                     {schedule.enabled ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                   </button>
                   <button
                     onClick={() => setEditingSchedule(schedule)}
-                    className="p-2 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded-xl transition-colors"
+                    className="p-2 rounded-xl transition-colors"
+                    style={{ color: 'var(--text-muted)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--neon-blue)';
+                      e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-muted)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
                     <Edit className="h-4 w-4" />
                   </button>
                   <button
                     onClick={() => handleDeleteSchedule(schedule.id)}
-                    className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-colors"
+                    className="p-2 rounded-xl transition-colors"
+                    style={{ color: 'var(--text-muted)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--neon-red)';
+                      e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-muted)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -184,34 +216,37 @@ export function BackupSchedulerComponent() {
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center space-x-3 text-gray-300">
-                  <Calendar className="h-4 w-4 text-blue-400" />
+                <div className="flex items-center space-x-3" style={{ color: 'var(--text-secondary)' }}>
+                  <Calendar className="h-4 w-4" style={{ color: 'var(--neon-blue)' }} />
                   <span className="text-sm">{getFrequencyText(schedule)}</span>
                 </div>
                 
-                <div className="bg-white/5 rounded-xl p-4">
-                  <div className="text-sm text-gray-400 space-y-1">
-                    <p><span className="text-white font-medium">Includes:</span> {schedule.includePaths.length} paths</p>
+                <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+                  <div className="text-sm space-y-1" style={{ color: 'var(--text-muted)' }}>
+                    <p><span className="font-medium" style={{ color: 'var(--text-primary)' }}>Includes:</span> {schedule.includePaths.length} paths</p>
                     {schedule.excludePaths.length > 0 && (
-                      <p><span className="text-white font-medium">Excludes:</span> {schedule.excludePaths.length} paths</p>
+                      <p><span className="font-medium" style={{ color: 'var(--text-primary)' }}>Excludes:</span> {schedule.excludePaths.length} paths</p>
                     )}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/10">
+              <div className="mt-6 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
                 <div className="flex items-center justify-between">
                   <span className={`font-semibold flex items-center space-x-2 ${
-                    schedule.enabled ? 'text-emerald-400' : 'text-gray-500'
+                    schedule.enabled ? '' : ''
                   }`}>
                     <div className={`w-2 h-2 rounded-full ${
-                      schedule.enabled ? 'bg-emerald-400 animate-pulse' : 'bg-gray-500'
+                      schedule.enabled ? 'animate-pulse' : ''
                     }`}></div>
+                    style={{ backgroundColor: schedule.enabled ? 'var(--neon-emerald)' : 'var(--text-muted)' }}
                     <span>{schedule.enabled ? 'Active' : 'Inactive'}</span>
                   </span>
                   <button
                     onClick={() => setEditingSchedule(schedule)}
                     className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                    className="font-medium transition-colors"
+                    style={{ color: 'var(--neon-blue)' }}
                   >
                     Configure
                   </button>
@@ -267,25 +302,25 @@ function ScheduleModal({ schedule, onSave, onCancel }: ScheduleModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="card-glass max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-fade-in-up">
-        <div className="p-8 border-b border-white/10">
-          <h3 className="text-2xl font-bold text-white">
+    <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
+      <div className="modal-glass max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-fade-in-up rounded-2xl">
+        <div className="p-8 border-b" style={{ borderColor: 'var(--border-color)' }}>
+          <h3 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
             {schedule ? 'Edit Schedule' : 'Create New Schedule'}
           </h3>
-          <p className="text-gray-400 mt-1">Configure your automated backup schedule</p>
+          <p className="mt-1" style={{ color: 'var(--text-muted)' }}>Configure your automated backup schedule</p>
         </div>
 
         <form onSubmit={handleSubmit} className="p-8 space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
               Schedule Name
             </label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="input-glass w-full"
+              className="input-glass w-full focus-ring"
               placeholder="e.g., Daily Documents Backup"
               required
             />
@@ -293,13 +328,13 @@ function ScheduleModal({ schedule, onSave, onCancel }: ScheduleModalProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                 Frequency
               </label>
               <select
                 value={formData.frequency}
                 onChange={(e) => setFormData({ ...formData, frequency: e.target.value as any })}
-                className="input-glass w-full"
+                className="input-glass w-full focus-ring"
               >
                 <option value="hourly">Hourly</option>
                 <option value="daily">Daily</option>
@@ -309,13 +344,13 @@ function ScheduleModal({ schedule, onSave, onCancel }: ScheduleModalProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                 Backup Type
               </label>
               <select
                 value={formData.backupType}
                 onChange={(e) => setFormData({ ...formData, backupType: e.target.value as any })}
-                className="input-glass w-full"
+                className="input-glass w-full focus-ring"
               >
                 <option value="incremental">Incremental</option>
                 <option value="full">Full Backup</option>
@@ -325,27 +360,27 @@ function ScheduleModal({ schedule, onSave, onCancel }: ScheduleModalProps) {
 
           {formData.frequency !== 'hourly' && (
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                 Time
               </label>
               <input
                 type="time"
                 value={formData.time}
                 onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                className="input-glass w-full max-w-xs"
+                className="input-glass w-full max-w-xs focus-ring"
               />
             </div>
           )}
 
           {formData.frequency === 'weekly' && (
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                 Day of Week
               </label>
               <select
                 value={formData.dayOfWeek || ''}
                 onChange={(e) => setFormData({ ...formData, dayOfWeek: e.target.value ? Number(e.target.value) : undefined })}
-                className="input-glass w-full max-w-xs"
+                className="input-glass w-full max-w-xs focus-ring"
               >
                 <option value="">Select day</option>
                 <option value="0">Sunday</option>
@@ -361,7 +396,7 @@ function ScheduleModal({ schedule, onSave, onCancel }: ScheduleModalProps) {
 
           {formData.frequency === 'monthly' && (
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                 Day of Month
               </label>
               <input
@@ -370,7 +405,7 @@ function ScheduleModal({ schedule, onSave, onCancel }: ScheduleModalProps) {
                 max="31"
                 value={formData.dayOfMonth || ''}
                 onChange={(e) => setFormData({ ...formData, dayOfMonth: e.target.value ? Number(e.target.value) : undefined })}
-                className="input-glass w-full max-w-xs"
+                className="input-glass w-full max-w-xs focus-ring"
               />
             </div>
           )}
@@ -381,9 +416,14 @@ function ScheduleModal({ schedule, onSave, onCancel }: ScheduleModalProps) {
               id="enabled"
               checked={formData.enabled}
               onChange={(e) => setFormData({ ...formData, enabled: e.target.checked })}
-              className="rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-white/10"
+              className="rounded focus-ring"
+              style={{ 
+                borderColor: 'var(--border-color)',
+                accentColor: 'var(--neon-blue)',
+                backgroundColor: 'var(--bg-secondary)'
+              }}
             />
-            <label htmlFor="enabled" className="text-gray-300">
+            <label htmlFor="enabled" style={{ color: 'var(--text-secondary)' }}>
               Enable this schedule immediately
             </label>
           </div>

@@ -70,26 +70,31 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
             {/* Signup Form */}
             <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
               <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg animate-neon-glow">
                   <Shield className="w-8 h-8 text-white" />
                 </div>
                 <h1 className="text-3xl font-bold text-white mb-2">Create Account</h1>
-                <p className="text-white/80">Join SecureBackup and protect your data</p>
+                <p style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Join SecureBackup and protect your data</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                     Full Name
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/60" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5" style={{ color: 'rgba(255, 255, 255, 0.6)' }} />
                     <input
                       id="name"
                       type="text"
                       value={formData.name}
                       onChange={(e) => handleInputChange('name', e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all"
+                      className="w-full pl-12 pr-4 py-3 rounded-xl text-white backdrop-blur-sm transition-all focus-ring"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        color: '#ffffff'
+                      }}
                       placeholder="Enter your full name"
                       required
                     />
@@ -97,17 +102,22 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-white/90 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                     Email Address
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/60" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5" style={{ color: 'rgba(255, 255, 255, 0.6)' }} />
                     <input
                       id="email"
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all"
+                      className="w-full pl-12 pr-4 py-3 rounded-xl text-white backdrop-blur-sm transition-all focus-ring"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        color: '#ffffff'
+                      }}
                       placeholder="Enter your email"
                       required
                     />
@@ -115,24 +125,36 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-white/90 mb-2">
+                  <label htmlFor="password" className="block text-sm font-medium mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                     Password
                   </label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/60" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5" style={{ color: 'rgba(255, 255, 255, 0.6)' }} />
                     <input
                       id="password"
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      className="w-full pl-12 pr-12 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all"
+                      className="w-full pl-12 pr-12 py-3 rounded-xl text-white backdrop-blur-sm transition-all focus-ring"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        color: '#ffffff'
+                      }}
                       placeholder="Create a password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white/80 transition-colors"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 transition-colors"
+                      style={{ color: 'rgba(255, 255, 255, 0.6)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
+                      }}
                     >
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
@@ -140,24 +162,36 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                 </div>
 
                 <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-white/90 mb-2">
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                     Confirm Password
                   </label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/60" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5" style={{ color: 'rgba(255, 255, 255, 0.6)' }} />
                     <input
                       id="confirmPassword"
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                      className="w-full pl-12 pr-12 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all"
+                      className="w-full pl-12 pr-12 py-3 rounded-xl text-white backdrop-blur-sm transition-all focus-ring"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        color: '#ffffff'
+                      }}
                       placeholder="Confirm your password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white/80 transition-colors"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 transition-colors"
+                      style={{ color: 'rgba(255, 255, 255, 0.6)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
+                      }}
                     >
                       {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
@@ -167,7 +201,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="w-full gradient-primary text-white py-3 px-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
                 >
                   {isLoading ? (
                     <div className="flex items-center justify-center">
@@ -181,11 +215,18 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
               </form>
 
               <div className="mt-8 text-center">
-                <p className="text-white/80">
+                <p style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
                   Already have an account?{' '}
                   <button
                     onClick={() => onNavigate('login')}
-                    className="text-blue-300 hover:text-blue-200 font-medium transition-colors"
+                    className="font-medium transition-colors"
+                    style={{ color: 'var(--neon-blue)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--neon-cyan)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--neon-blue)';
+                    }}
                   >
                     Sign in
                   </button>
@@ -201,21 +242,21 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
             {/* About Section */}
             <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
               <h2 className="text-3xl font-bold text-white mb-6">Join Thousands of Users</h2>
-              <div className="space-y-4 text-white/90">
+              <div className="space-y-4" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: 'var(--neon-emerald)' }} />
                   <p>Start with 5GB of free secure storage</p>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: 'var(--neon-emerald)' }} />
                   <p>Military-grade encryption protects your sensitive data</p>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: 'var(--neon-emerald)' }} />
                   <p>Automated scheduling keeps your files always backed up</p>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: 'var(--neon-emerald)' }} />
                   <p>Access your files from any device, anywhere</p>
                 </div>
               </div>
@@ -229,7 +270,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
             {/* Tagline */}
             <div className="text-center">
               <h3 className="text-2xl font-bold text-white mb-2">Your data, always safe</h3>
-              <p className="text-white/80">with SecureBackup</p>
+              <p style={{ color: 'rgba(255, 255, 255, 0.8)' }}>with SecureBackup</p>
             </div>
           </div>
         </div>

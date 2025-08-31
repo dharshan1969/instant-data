@@ -94,22 +94,23 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
 
   const renderBackupTab = () => (
     <div className="space-y-8">
-      <div className="card-glass p-6">
+      <div className="card-glass p-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-              <Clock className="h-6 w-6 text-blue-400" />
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(59, 130, 246, 0.2)' }}>
+              <Clock className="h-6 w-6" style={{ color: 'var(--neon-blue)' }} />
             </div>
             <div>
-              <h3 className="font-semibold text-white">Automatic Backup</h3>
-              <p className="text-gray-400">Automatically backup your files</p>
+              <h3 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Automatic Backup</h3>
+              <p style={{ color: 'var(--text-muted)' }}>Automatically backup your files</p>
             </div>
           </div>
           <button
             onClick={() => setAutoSync(!autoSync)}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-              autoSync ? 'bg-blue-600' : 'bg-gray-600'
+              autoSync ? '' : ''
             }`}
+            style={{ backgroundColor: autoSync ? 'var(--neon-blue)' : 'var(--text-muted)' }}
           >
             <span
               className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -123,13 +124,13 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
       {autoSync && (
         <div className="space-y-6">
           <div className="card-glass p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-3">
+            <label className="block text-sm font-medium mb-3" style={{ color: 'var(--text-secondary)' }}>
               Backup Frequency
             </label>
             <select
               value={syncFrequency}
               onChange={(e) => setSyncFrequency(e.target.value)}
-              className="input-glass w-full max-w-xs"
+              className="input-glass w-full max-w-xs focus-ring"
             >
               <option value="hourly">Every Hour</option>
               <option value="daily">Daily</option>
@@ -140,19 +141,20 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
           <div className="card-glass p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center">
-                  <Wifi className="h-5 w-5 text-emerald-400" />
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(16, 185, 129, 0.2)' }}>
+                  <Wifi className="h-5 w-5" style={{ color: 'var(--neon-emerald)' }} />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white">Wi-Fi Only</h4>
-                  <p className="text-gray-400">Only backup when connected to Wi-Fi</p>
+                  <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Wi-Fi Only</h4>
+                  <p style={{ color: 'var(--text-muted)' }}>Only backup when connected to Wi-Fi</p>
                 </div>
               </div>
               <button
                 onClick={() => setWifiOnly(!wifiOnly)}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  wifiOnly ? 'bg-emerald-600' : 'bg-gray-600'
+                  wifiOnly ? '' : ''
                 }`}
+                style={{ backgroundColor: wifiOnly ? 'var(--neon-emerald)' : 'var(--text-muted)' }}
               >
                 <span
                   className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -165,14 +167,14 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
 
           <div className="card-glass p-6">
             <div className="flex items-center space-x-4 mb-4">
-              <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center">
-                <Battery className="h-5 w-5 text-orange-400" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 158, 11, 0.2)' }}>
+                <Battery className="h-5 w-5" style={{ color: 'var(--neon-orange)' }} />
               </div>
               <div>
-                <label className="font-semibold text-white">
+                <label className="font-semibold" style={{ color: 'var(--text-primary)' }}>
                   Pause backup when battery is below {batteryLimit}%
                 </label>
-                <p className="text-gray-400">Preserve battery life on mobile devices</p>
+                <p style={{ color: 'var(--text-muted)' }}>Preserve battery life on mobile devices</p>
               </div>
             </div>
             <input
@@ -181,7 +183,8 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
               max="50"
               value={batteryLimit}
               onChange={(e) => setBatteryLimit(Number(e.target.value))}
-              className="w-full max-w-xs accent-orange-500"
+              className="w-full max-w-xs"
+              style={{ accentColor: 'var(--neon-orange)' }}
             />
           </div>
         </div>
@@ -192,7 +195,7 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
   const renderDevicesTab = () => (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-bold text-white">Connected Devices</h3>
+        <h3 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>Connected Devices</h3>
         <button className="btn-primary">
           <Plus className="h-4 w-4 mr-2" />
           Add Device
@@ -201,29 +204,53 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
 
       <div className="space-y-4">
         {devices.map((device) => (
-          <div key={device.id} className="card-glass p-6 hover:bg-white/5 transition-colors">
+          <div key={device.id} className="card-glass p-6 hover-lift">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className={`p-3 rounded-xl ${device.status === 'online' ? 'bg-emerald-500/20' : 'bg-gray-600/20'}`}>
+                <div className="p-3 rounded-xl" style={{ 
+                  backgroundColor: device.status === 'online' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(107, 114, 128, 0.2)' 
+                }}>
                   {getDeviceIcon(device.type)}
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold text-white">{device.name}</h4>
-                  <div className="flex items-center space-x-2 text-sm text-gray-400 mt-1">
-                    <span className={`w-2 h-2 rounded-full ${device.status === 'online' ? 'bg-emerald-400' : 'bg-gray-500'}`}></span>
+                  <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>{device.name}</h4>
+                  <div className="flex items-center space-x-2 text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
+                    <span className="w-2 h-2 rounded-full" style={{ 
+                      backgroundColor: device.status === 'online' ? 'var(--neon-emerald)' : 'var(--text-muted)' 
+                    }}></span>
                     <span>Last seen: {device.lastSeen}</span>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center space-x-2">
-                <button className="p-2 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors">
+                <button 
+                  className="p-2 rounded-lg transition-colors"
+                  style={{ color: 'var(--text-muted)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--neon-blue)';
+                    e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--text-muted)';
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
                   <Edit className="h-4 w-4" />
                 </button>
                 <button 
                   onClick={() => handleUnlinkDevice(device.id)}
-                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                  className="p-2 rounded-lg transition-colors"
+                  style={{ color: 'var(--text-muted)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--neon-red)';
+                    e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--text-muted)';
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -237,24 +264,24 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
 
   const renderNotificationsTab = () => (
     <div className="space-y-8">
-      <h3 className="text-xl font-bold text-white">Notification Preferences</h3>
+      <h3 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>Notification Preferences</h3>
       
       <div className="space-y-4">
         {Object.entries(notifications).map(([key, value]) => (
           <div key={key} className="card-glass p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="w-10 h-10 bg-purple-500/20 rounded-xl flex items-center justify-center">
-                  <Bell className="h-5 w-5 text-purple-400" />
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(139, 92, 246, 0.2)' }}>
+                  <Bell className="h-5 w-5" style={{ color: 'var(--neon-purple)' }} />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white">
+                  <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>
                     {key === 'backupComplete' && 'Backup Complete'}
                     {key === 'syncPaused' && 'Sync Paused'}
                     {key === 'storageWarning' && 'Storage Warning'}
                     {key === 'securityAlerts' && 'Security Alerts'}
                   </h4>
-                  <p className="text-gray-400">
+                  <p style={{ color: 'var(--text-muted)' }}>
                     {key === 'backupComplete' && 'Get notified when backups are completed'}
                     {key === 'syncPaused' && 'Alerts when sync is paused or interrupted'}
                     {key === 'storageWarning' && 'Warnings when storage is running low'}
@@ -266,8 +293,9 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
               <button
                 onClick={() => setNotifications({ ...notifications, [key]: !value })}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  value ? 'bg-blue-600' : 'bg-gray-600'
+                  value ? '' : ''
                 }`}
+                style={{ backgroundColor: value ? 'var(--neon-blue)' : 'var(--text-muted)' }}
               >
                 <span
                   className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -284,14 +312,14 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
 
   const renderSecurityTab = () => (
     <div className="space-y-8">
-      <div className="card-glass p-6 border border-emerald-500/30">
+      <div className="card-glass p-6 border" style={{ borderColor: 'rgba(16, 185, 129, 0.3)' }}>
         <div className="flex items-center space-x-4">
-          <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
-            <Shield className="h-6 w-6 text-emerald-400" />
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(16, 185, 129, 0.2)' }}>
+            <Shield className="h-6 w-6" style={{ color: 'var(--neon-emerald)' }} />
           </div>
           <div>
-            <h3 className="font-semibold text-white">Security Status</h3>
-            <p className="text-emerald-400">
+            <h3 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Security Status</h3>
+            <p style={{ color: 'var(--neon-emerald)' }}>
               Your data is encrypted end-to-end and stored securely across decentralized nodes.
             </p>
           </div>
@@ -302,15 +330,18 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
         <div className="card-glass p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                <Lock className="h-5 w-5 text-blue-400" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(59, 130, 246, 0.2)' }}>
+                <Lock className="h-5 w-5" style={{ color: 'var(--neon-blue)' }} />
               </div>
               <div>
-                <h4 className="font-semibold text-white">Data Encryption</h4>
-                <p className="text-gray-400">All files are encrypted before upload</p>
+                <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Data Encryption</h4>
+                <p style={{ color: 'var(--text-muted)' }}>All files are encrypted before upload</p>
               </div>
             </div>
-            <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full">
+            <span className="px-3 py-1 text-sm font-semibold rounded-full" style={{ 
+              backgroundColor: 'rgba(16, 185, 129, 0.2)', 
+              color: 'var(--neon-emerald)' 
+            }}>
               Enabled
             </span>
           </div>
@@ -319,15 +350,18 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
         <div className="card-glass p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-purple-500/20 rounded-xl flex items-center justify-center">
-                <Globe className="h-5 w-5 text-purple-400" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(139, 92, 246, 0.2)' }}>
+                <Globe className="h-5 w-5" style={{ color: 'var(--neon-purple)' }} />
               </div>
               <div>
-                <h4 className="font-semibold text-white">Secure Connections</h4>
-                <p className="text-gray-400">All data transfers use HTTPS encryption</p>
+                <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Secure Connections</h4>
+                <p style={{ color: 'var(--text-muted)' }}>All data transfers use HTTPS encryption</p>
               </div>
             </div>
-            <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full">
+            <span className="px-3 py-1 text-sm font-semibold rounded-full" style={{ 
+              backgroundColor: 'rgba(16, 185, 129, 0.2)', 
+              color: 'var(--neon-emerald)' 
+            }}>
               Active
             </span>
           </div>
@@ -336,12 +370,12 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
         <div className="card-glass p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center">
-                <User className="h-5 w-5 text-orange-400" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 158, 11, 0.2)' }}>
+                <User className="h-5 w-5" style={{ color: 'var(--neon-orange)' }} />
               </div>
               <div>
-                <h4 className="font-semibold text-white">Data Export</h4>
-                <p className="text-gray-400">Download a copy of your data</p>
+                <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Data Export</h4>
+                <p style={{ color: 'var(--text-muted)' }}>Download a copy of your data</p>
               </div>
             </div>
             <button className="btn-secondary">
@@ -356,8 +390,8 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Tab Navigation */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-        <div className="border-b border-gray-200 dark:border-gray-700">
+      <div className="card-glass">
+        <div className="border-b" style={{ borderColor: 'var(--border-color)' }}>
           <nav className="flex space-x-8 px-8" aria-label="Tabs">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -367,9 +401,27 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center space-x-2 py-6 px-1 border-b-2 font-semibold text-sm transition-all ${
                     activeTab === tab.id
-                      ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                      : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                      ? ''
+                      : 'border-transparent'
                   }`}
+                  style={activeTab === tab.id ? {
+                    borderColor: 'var(--neon-blue)',
+                    color: 'var(--neon-blue)'
+                  } : {
+                    color: 'var(--text-muted)'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeTab !== tab.id) {
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeTab !== tab.id) {
+                      e.currentTarget.style.color = 'var(--text-muted)';
+                      e.currentTarget.style.borderColor = 'transparent';
+                    }
+                  }}
                 >
                   <Icon className="h-4 w-4" />
                   <span>{tab.label}</span>
@@ -391,7 +443,7 @@ export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
       <div className="flex justify-end">
         <button
           onClick={handleSaveSettings}
-          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+          className="gradient-primary text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
         >
           <Save className="h-5 w-5 mr-2" />
           Save Changes

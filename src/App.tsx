@@ -52,7 +52,7 @@ function AppContent() {
   // Show auth pages if not authenticated
   if (!isAuthenticated && !['landing', 'login', 'signup'].includes(currentView)) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300">
         {renderCurrentView()}
         <Notifications />
         <UpgradePlanModal 
@@ -66,7 +66,7 @@ function AppContent() {
   // Show auth pages
   if (['landing', 'login', 'signup'].includes(currentView)) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300">
         {renderCurrentView()}
         <Notifications />
         <UpgradePlanModal 
@@ -78,7 +78,7 @@ function AppContent() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="flex h-screen bg-white dark:bg-black transition-colors duration-300">
       <Sidebar
         currentView={currentView}
         onViewChange={setCurrentView}
@@ -93,7 +93,7 @@ function AppContent() {
           onMenuClick={() => setIsSidebarOpen(true)}
         />
         
-        <main className="flex-1 overflow-auto p-4 md:p-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+        <main className="flex-1 overflow-auto p-4 md:p-6 bg-white dark:bg-black transition-colors duration-300">
           {renderCurrentView()}
         </main>
       </div>

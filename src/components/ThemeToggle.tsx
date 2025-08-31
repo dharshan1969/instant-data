@@ -8,16 +8,29 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-3 rounded-xl bg-white/10 dark:bg-white/10 hover:bg-white/20 dark:hover:bg-white/20 transition-all duration-300 group"
+      className="p-3 rounded-xl transition-all duration-300 group focus-ring"
+      style={{
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
+        border: '1px solid rgba(255, 255, 255, 0.2)'
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+        e.currentTarget.style.transform = 'scale(1.05)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+        e.currentTarget.style.transform = 'scale(1)';
+      }}
       title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
       <div className="relative w-5 h-5">
-        <Sun className={`absolute inset-0 w-5 h-5 text-amber-500 transition-all duration-300 ${
+        <Sun className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${
           theme === 'light' ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-75'
-        }`} />
-        <Moon className={`absolute inset-0 w-5 h-5 text-blue-400 transition-all duration-300 ${
+        }`} style={{ color: 'var(--neon-orange)' }} />
+        <Moon className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${
           theme === 'dark' ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'
-        }`} />
+        }`} style={{ color: 'var(--neon-blue)' }} />
       </div>
     </button>
   );

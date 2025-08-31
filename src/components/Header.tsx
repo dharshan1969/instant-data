@@ -21,21 +21,31 @@ const viewTitles = {
 
 export function Header({ currentView, onMenuClick }: HeaderProps) {
   return (
-    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 transition-colors duration-300">
+    <header className="glass border-b px-6 py-4 transition-colors duration-300" style={{ borderColor: 'var(--border-color)' }}>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <button
             onClick={onMenuClick}
-            className="lg:hidden p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            className="lg:hidden p-2 rounded-xl transition-colors hover:bg-opacity-10"
+            style={{ 
+              color: 'var(--text-muted)',
+              '--tw-bg-opacity': '0.1'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
           >
-            <Menu className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+            <Menu className="h-5 w-5" style={{ color: 'var(--text-muted)' }} />
           </button>
           
           <div>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
               {viewTitles[currentView as keyof typeof viewTitles]}
             </h1>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
               {currentView === 'dashboard' && 'Monitor and manage your backups'}
               {currentView === 'upload' && 'Secure file upload and backup'}
               {currentView === 'history' && 'Browse your backup history'}
@@ -47,22 +57,31 @@ export function Header({ currentView, onMenuClick }: HeaderProps) {
 
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500 dark:text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: 'var(--text-muted)' }} />
             <input
               type="text"
               placeholder="Search files..."
-              className="pl-10 pr-4 py-2 w-64 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="input-glass pl-10 pr-4 py-2 w-64 focus-ring"
             />
           </div>
           
           <ThemeToggle />
           
-          <button className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors relative">
-            <Bell className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-            <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full animate-pulse"></span>
+          <button 
+            className="p-2 rounded-xl transition-colors relative"
+            style={{ color: 'var(--text-muted)' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+          >
+            <Bell className="h-5 w-5" />
+            <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full animate-pulse" style={{ backgroundColor: 'var(--neon-red)' }}></span>
           </button>
 
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 gradient-primary rounded-full flex items-center justify-center">
             <User className="w-4 h-4 text-white" />
           </div>
         </div>
